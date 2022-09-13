@@ -1,0 +1,82 @@
+name: manage-azure-policy-cde1578b
+on:
+  workflow_dispatch:
+    inputs:
+      remarks:
+        description: 'Reason for triggering the workflow run'
+        required: false
+        default: 'Updating Azure Policies'
+
+
+## Uncomment the following if you wish to automatically trigger workflow run with every commit
+#
+#  push:
+#    paths:
+#      - 'Policies/policies/_Aperçu_L’agent_Azure_Security_doit_être_installé_sur_vos_machines_Windows_Arc_0367cfc4-90b3-46ba-a8a6-ddd5d3514878/**'
+#      - 'Policies/policies/_Aperçu_Configurer_Dependency_Agent_sur_serveurs_Linux_avec_Azure_Arc_avec_les_paramètres_de_l’agent_Azure_Monitoring_Agent_08a4470f-b26d-428d-97f4-7e3e9c92b366/**'
+#      - 'Policies/policies/_Aperçu_Configurer_l’extension_ChangeTracking_pour_les_machines_Linux_Arc_10caed8a-652c-4d1d-84e4-2805b7c07278/**'
+#      - 'Policies/policies/_Aperçu_L’agent_Azure_Security_doit_être_installé_sur_vos_machines_Linux_Arc_1f300abb-f5a0-41c3-a163-91bd3ed35de7/**'
+#      - 'Policies/policies/_Aperçu_Configurer_les_machines_Linux_Arc_prises_en_charge_pour_installer_automatiquement_l’agent_de_sécurité_Azure_2f47ec78-4301-4655-b78e-b29377030cdc/**'
+#      - 'Policies/policies/_Aperçu_Configurer_l’association_pour_lier_des_machines_Arc_à_la_règle_de_collecte_de_données_Microsoft_Defender_pour_le_cloud_par_défaut_30f52897-df47-4ca0-81a8-a3be3e8dd226/**'
+#      - 'Policies/policies/_Aperçu_Déployer_l’agent_Microsoft_Defender_pour_point_de_terminaison_sur_des_machines_Windows_Azure_Arc_37c043a6-6d64-656d-6465-b362dfeb354a/**'
+#      - 'Policies/policies/_Aperçu_Configurer_l’extension_ChangeTracking_pour_les_machines_Windows_Arc_4bb303db-d051-4099-95d2-e3e1428a4cd5/**'
+#      - 'Policies/policies/_Aperçu_Configurer_les_machines_Windows_Azure_Arc_avec_des_agents_Log_Analytics_connectés_à_l’espace_de_travail_Log_Analytics_par_défaut_594c1276-f44f-482d-9910-71fac2ce5ae0/**'
+#      - 'Policies/policies/_Aperçu_Déployer_une_règle_de_collecte_de_données_VMInsights_et_une_association_de_règles_de_collecte_de_données_pour_les_machines_Arc_dans_le_groupe_de_ressources_7c4214e9-ea57-487a-b38e-310ec09bc21d/**'
+#      - 'Policies/policies/_Aperçu_Configurer_Dependency_Agent_sur_serveurs_Windows_avec_Azure_Arc_avec_les_paramètres_de_l’agent_Azure_Monitoring_Agent_84cfed75-dfd4-421b-93df-725b479d356a/**'
+#      - 'Policies/policies/_Aperçu_L’extension_ChangeTracking_doit_être_installée_sur_votre_machine_Windows_Arc_a7f5e735-d212-4c32-9229-d12bffbc7e00/**'
+#      - 'Policies/policies/_Aperçu_Configurer_les_machines_Linux_Azure_Arc_avec_des_agents_Log_Analytics_connectés_à_l’espace_de_travail_Log_Analytics_par_défaut_bacd7fca-1938-443d-aad6-a786107b1bfb/**'
+#      - 'Policies/policies/_Aperçu_Configurer_la_vérification_périodique_des_mises_à_jour_système_manquantes_sur_les_serveurs_compatibles_avec_Azure_Arc_bfea026e-043f-4ff4-9d1b-bf301ca7ff46/**'
+#      - 'Policies/policies/_Aperçu_Configurer_l’association_pour_lier_des_machines_Arc_à_la_règle_de_collecte_de_données_Microsoft_Defender_pour_le_cloud_définie_par_l’utilisateur_c9ae938d-3d6f-4466-b7c3-351761d9c890/**'
+#      - 'Policies/policies/_Aperçu_Configurer_les_machines_Windows_Arc_prises_en_charge_pour_installer_automatiquement_l_agent_de_sécurité_Azure_d01f3018-de9f-4d75-8dae-d12c1875da9f/**'
+#      - 'Policies/policies/L’agent_Azure_Monitor_doit_être_installé_sur_les_ordinateurs_compatibles_avec_Windows_Arc_ec621e21-8b48-403d-a549-fc9023d4747f/**'
+#      - 'Policies/policies/_Aperçu_L’extension_ChangeTracking_doit_être_installée_sur_votre_machine_Linux_Arc_fc47609f-4d9b-4aed-806b-446816cc63a3/**'
+#      - 'Policies/policies/L’agent_de_Azure_Monitor_doit_être_installé_sur_les_machines_compatibles_Avec_Linux_Arc_f17d891d-ff20-46f2-bad3-9e0a5403a4d3/**'
+#      - 'Policies/policies/Configurer_Dependency_Agent_sur_les_serveurs_Linux_avec_Azure_Arc_deacecc0-9f84-44d2-bb82-46f32d766d43/**'
+#      - 'Policies/policies/Configurer_les_machines_Linux_Arc_à_associer_à_une_règle_de_collecte_de_données_d5c37ce1-5f52-4523-b949-f19bf945b73a/**'
+#      - 'Policies/policies/Configurer_les_machines_Windows_Arc_à_associer_à_une_règle_de_collecte_de_données_c24c537f-2516-4c2f-aac5-2cd26baa3d26/**'
+#      - 'Policies/policies/Configurer_des_machines_compatibles_Avec_Windows_Arc_pour_exécuter_Agent_Azure_Monitor_94f686d6-9a24-4e19-91f1-de937dc171a4/**'
+#      - 'Policies/policies/Configurer_Dependency_Agent_sur_les_serveurs_Windows_avec_Azure_Arc_91cb9edd-cd92-4d2f-b2f2-bdd8d065a3d4/**'
+#      - 'Policies/policies/Configurer_des_machines_compatibles_Avec_Linux_Arc_pour_exécuter_l’agent_Azure_Monitor_845857af-0333-4c5d-bbbc-6076697da122/**'
+#      - 'Policies/policies/_Aperçu_Configurer_des_machines_Arc_pour_créer_le_pipeline_Microsoft_Defender_pour_le_cloud_par_défaut_à_l’aide_de_l’agent_Azure_Monitor_3b1a8e0a-b2e1-48be-9365-28be2fbef550/**'
+#      - .github/workflows/manage-azure-policy-cde1578b.yml
+jobs:
+  apply-azure-policy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_cde1578b}}
+        allow-no-subscriptions: true
+    - name: Create or Update Azure Policies
+      uses: azure/manage-azure-policy@v0
+      with:
+        paths: |
+          Policies/policies/_Aperçu_L’agent_Azure_Security_doit_être_installé_sur_vos_machines_Windows_Arc_0367cfc4-90b3-46ba-a8a6-ddd5d3514878/**
+          Policies/policies/_Aperçu_Configurer_Dependency_Agent_sur_serveurs_Linux_avec_Azure_Arc_avec_les_paramètres_de_l’agent_Azure_Monitoring_Agent_08a4470f-b26d-428d-97f4-7e3e9c92b366/**
+          Policies/policies/_Aperçu_Configurer_l’extension_ChangeTracking_pour_les_machines_Linux_Arc_10caed8a-652c-4d1d-84e4-2805b7c07278/**
+          Policies/policies/_Aperçu_L’agent_Azure_Security_doit_être_installé_sur_vos_machines_Linux_Arc_1f300abb-f5a0-41c3-a163-91bd3ed35de7/**
+          Policies/policies/_Aperçu_Configurer_les_machines_Linux_Arc_prises_en_charge_pour_installer_automatiquement_l’agent_de_sécurité_Azure_2f47ec78-4301-4655-b78e-b29377030cdc/**
+          Policies/policies/_Aperçu_Configurer_l’association_pour_lier_des_machines_Arc_à_la_règle_de_collecte_de_données_Microsoft_Defender_pour_le_cloud_par_défaut_30f52897-df47-4ca0-81a8-a3be3e8dd226/**
+          Policies/policies/_Aperçu_Déployer_l’agent_Microsoft_Defender_pour_point_de_terminaison_sur_des_machines_Windows_Azure_Arc_37c043a6-6d64-656d-6465-b362dfeb354a/**
+          Policies/policies/_Aperçu_Configurer_l’extension_ChangeTracking_pour_les_machines_Windows_Arc_4bb303db-d051-4099-95d2-e3e1428a4cd5/**
+          Policies/policies/_Aperçu_Configurer_les_machines_Windows_Azure_Arc_avec_des_agents_Log_Analytics_connectés_à_l’espace_de_travail_Log_Analytics_par_défaut_594c1276-f44f-482d-9910-71fac2ce5ae0/**
+          Policies/policies/_Aperçu_Déployer_une_règle_de_collecte_de_données_VMInsights_et_une_association_de_règles_de_collecte_de_données_pour_les_machines_Arc_dans_le_groupe_de_ressources_7c4214e9-ea57-487a-b38e-310ec09bc21d/**
+          Policies/policies/_Aperçu_Configurer_Dependency_Agent_sur_serveurs_Windows_avec_Azure_Arc_avec_les_paramètres_de_l’agent_Azure_Monitoring_Agent_84cfed75-dfd4-421b-93df-725b479d356a/**
+          Policies/policies/_Aperçu_L’extension_ChangeTracking_doit_être_installée_sur_votre_machine_Windows_Arc_a7f5e735-d212-4c32-9229-d12bffbc7e00/**
+          Policies/policies/_Aperçu_Configurer_les_machines_Linux_Azure_Arc_avec_des_agents_Log_Analytics_connectés_à_l’espace_de_travail_Log_Analytics_par_défaut_bacd7fca-1938-443d-aad6-a786107b1bfb/**
+          Policies/policies/_Aperçu_Configurer_la_vérification_périodique_des_mises_à_jour_système_manquantes_sur_les_serveurs_compatibles_avec_Azure_Arc_bfea026e-043f-4ff4-9d1b-bf301ca7ff46/**
+          Policies/policies/_Aperçu_Configurer_l’association_pour_lier_des_machines_Arc_à_la_règle_de_collecte_de_données_Microsoft_Defender_pour_le_cloud_définie_par_l’utilisateur_c9ae938d-3d6f-4466-b7c3-351761d9c890/**
+          Policies/policies/_Aperçu_Configurer_les_machines_Windows_Arc_prises_en_charge_pour_installer_automatiquement_l_agent_de_sécurité_Azure_d01f3018-de9f-4d75-8dae-d12c1875da9f/**
+          Policies/policies/L’agent_Azure_Monitor_doit_être_installé_sur_les_ordinateurs_compatibles_avec_Windows_Arc_ec621e21-8b48-403d-a549-fc9023d4747f/**
+          Policies/policies/_Aperçu_L’extension_ChangeTracking_doit_être_installée_sur_votre_machine_Linux_Arc_fc47609f-4d9b-4aed-806b-446816cc63a3/**
+          Policies/policies/L’agent_de_Azure_Monitor_doit_être_installé_sur_les_machines_compatibles_Avec_Linux_Arc_f17d891d-ff20-46f2-bad3-9e0a5403a4d3/**
+          Policies/policies/Configurer_Dependency_Agent_sur_les_serveurs_Linux_avec_Azure_Arc_deacecc0-9f84-44d2-bb82-46f32d766d43/**
+          Policies/policies/Configurer_les_machines_Linux_Arc_à_associer_à_une_règle_de_collecte_de_données_d5c37ce1-5f52-4523-b949-f19bf945b73a/**
+          Policies/policies/Configurer_les_machines_Windows_Arc_à_associer_à_une_règle_de_collecte_de_données_c24c537f-2516-4c2f-aac5-2cd26baa3d26/**
+          Policies/policies/Configurer_des_machines_compatibles_Avec_Windows_Arc_pour_exécuter_Agent_Azure_Monitor_94f686d6-9a24-4e19-91f1-de937dc171a4/**
+          Policies/policies/Configurer_Dependency_Agent_sur_les_serveurs_Windows_avec_Azure_Arc_91cb9edd-cd92-4d2f-b2f2-bdd8d065a3d4/**
+          Policies/policies/Configurer_des_machines_compatibles_Avec_Linux_Arc_pour_exécuter_l’agent_Azure_Monitor_845857af-0333-4c5d-bbbc-6076697da122/**
+          Policies/policies/_Aperçu_Configurer_des_machines_Arc_pour_créer_le_pipeline_Microsoft_Defender_pour_le_cloud_par_défaut_à_l’aide_de_l’agent_Azure_Monitor_3b1a8e0a-b2e1-48be-9365-28be2fbef550/**

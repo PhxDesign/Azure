@@ -1,0 +1,365 @@
+{
+ "properties": {
+  "displayName": "[Aperçu]: Déployer une règle de collecte de données VMInsights et une association de règles de collecte de données pour les machines Arc dans le groupe de ressources",
+  "policyType": "BuiltIn",
+  "mode": "Indexed",
+  "description": "Déployez une règle de collecte de données pour VMInsights et déployez l’association de règles de collecte de données pour toutes les machines Arc du groupe de ressources. La stratégie demande si l’activation des processus et des dépendances est nécessaire et crée le DCR en conséquence.",
+  "metadata": {
+   "version": "1.1.1-preview",
+   "category": "Monitoring",
+   "preview": true
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Effet",
+     "description": "Activer ou désactiver l'exécution de la stratégie"
+    },
+    "allowedValues": [
+     "DeployIfNotExists",
+     "Disabled"
+    ],
+    "defaultValue": "DeployIfNotExists"
+   },
+   "workspaceResourceId": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Espace de travail Log Analytics",
+     "description": "Sélectionnez l'espace de travail Log Analytics dans la liste déroulante. S'il est en dehors de l'étendue de l'affectation, vous devez accorder manuellement les autorisations « Contributeur Log Analytics » (ou similaires) à l'ID de principal de l'affectation de stratégie.",
+     "strongType": "omsWorkspace",
+     "assignPermissions": true
+    }
+   },
+   "userGivenDcrName": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Nom de la règle de collecte de données (DCR)",
+     "description": "Il s’agit du nom de la règle de collecte de données (DCR) AMA-VMI"
+    },
+    "defaultValue": "ama-vmi-default"
+   },
+   "enableProcessesAndDependencies": {
+    "type": "Boolean",
+    "metadata": {
+     "displayName": "Activer les processus et les dépendances",
+     "description": "Indicateur permettant d’activer la collecte des données des processus et des dépendances dans VMInsights"
+    },
+    "allowedValues": [
+     true,
+     false
+    ],
+    "defaultValue": false
+   }
+  },
+  "policyRule": {
+   "if": {
+    "field": "type",
+    "equals": "Microsoft.HybridCompute/machines"
+   },
+   "then": {
+    "effect": "[parameters('effect')]",
+    "details": {
+     "type": "Microsoft.Insights/dataCollectionRuleAssociations",
+     "roleDefinitionIds": [
+      "/providers/microsoft.authorization/roleDefinitions/749f88d5-cbae-40b8-bcfc-e573ddc772fa",
+      "/providers/microsoft.authorization/roleDefinitions/92aaf0da-9dab-42b6-94a3-d43ce8d16293"
+     ],
+     "existenceCondition": {
+      "allOf": [
+       {
+        "field": "Microsoft.Insights/dataCollectionRuleAssociations/dataCollectionRuleId",
+        "equals": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Insights/dataCollectionRules/MSVMI-', parameters('userGivenDcrName'), '-dcr')]"
+       },
+       {
+        "field": "name",
+        "equals": "VMInsights-Dcr-Association"
+       }
+      ]
+     },
+     "deployment": {
+      "properties": {
+       "mode": "incremental",
+       "parameters": {
+        "workspaceResourceId": {
+         "value": "[parameters('workspaceResourceId')]"
+        },
+        "resourceGroup": {
+         "value": "[resourceGroup().name]"
+        },
+        "vmName": {
+         "value": "[field('name')]"
+        },
+        "userGivenDcrName": {
+         "value": "[parameters('userGivenDcrName')]"
+        },
+        "enableProcessesAndDependencies": {
+         "value": "[parameters('enableProcessesAndDependencies')]"
+        }
+       },
+       "template": {
+        "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": {
+         "resourceGroup": {
+          "type": "string"
+         },
+         "vmName": {
+          "type": "string"
+         },
+         "workspaceResourceId": {
+          "type": "string"
+         },
+         "userGivenDcrName": {
+          "type": "string"
+         },
+         "enableProcessesAndDependencies": {
+          "type": "bool"
+         }
+        },
+        "variables": {
+         "subscriptionId": "[subscription().subscriptionId]",
+         "dcrName": "[concat('MSVMI-', parameters('userGivenDcrName'), '-dcr')]",
+         "dcraName": "[concat(parameters('vmName'), '/Microsoft.Insights/VMInsights-Dcr-Association')]",
+         "dcrId": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/', parameters('resourceGroup'), '/providers/Microsoft.Insights/dataCollectionRules/', variables('dcrName'))]",
+         "dcrDeployment": "[concat('dcrDeployment-', uniqueString(deployment().name))]",
+         "dcraDeployment": "[concat('dcraDeployment-', uniqueString(deployment().name))]"
+        },
+        "resources": [
+         {
+          "type": "microsoft.resources/deployments",
+          "name": "get-workspace-region",
+          "apiVersion": "2020-08-01",
+          "properties": {
+           "mode": "Incremental",
+           "template": {
+            "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+            "contentVersion": "1.0.0.0",
+            "resources": [],
+            "outputs": {
+             "workspaceLocation": {
+              "type": "string",
+              "value": "[reference(parameters('workspaceResourceId'), '2020-08-01', 'Full').location]"
+             }
+            }
+           }
+          }
+         },
+         {
+          "condition": "[not(parameters('enableProcessesAndDependencies'))]",
+          "type": "microsoft.resources/deployments",
+          "name": "[concat(variables('dcrDeployment'),'-noDA')]",
+          "apiVersion": "2020-08-01",
+          "properties": {
+           "mode": "Incremental",
+           "parameters": {
+            "workspaceRegion": {
+             "value": "[reference('get-workspace-region').outputs.workspaceLocation.value]"
+            }
+           },
+           "template": {
+            "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+             "workspaceRegion": {
+              "type": "string"
+             }
+            },
+            "resources": [
+             {
+              "type": "Microsoft.Insights/dataCollectionRules",
+              "apiVersion": "2021-04-01",
+              "name": "[variables('dcrName')]",
+              "location": "[[parameters('workspaceRegion')]",
+              "properties": {
+               "description": "Data collection rule for VM Insights.",
+               "dataSources": {
+                "performanceCounters": [
+                 {
+                  "name": "VMInsightsPerfCounters",
+                  "streams": [
+                   "Microsoft-InsightsMetrics"
+                  ],
+                  "scheduledTransferPeriod": "PT1M",
+                  "samplingFrequencyInSeconds": 60,
+                  "counterSpecifiers": [
+                   "\\VmInsights\\DetailedMetrics"
+                  ]
+                 }
+                ]
+               },
+               "destinations": {
+                "logAnalytics": [
+                 {
+                  "workspaceResourceId": "[parameters('workspaceResourceId')]",
+                  "name": "VMInsightsPerf-Logs-Dest"
+                 }
+                ]
+               },
+               "dataFlows": [
+                {
+                 "streams": [
+                  "Microsoft-InsightsMetrics"
+                 ],
+                 "destinations": [
+                  "VMInsightsPerf-Logs-Dest"
+                 ]
+                }
+               ]
+              }
+             }
+            ]
+           }
+          }
+         },
+         {
+          "condition": "[parameters('enableProcessesAndDependencies')]",
+          "type": "microsoft.resources/deployments",
+          "name": "[concat(variables('dcrDeployment'),'-DA')]",
+          "apiVersion": "2020-08-01",
+          "properties": {
+           "mode": "Incremental",
+           "parameters": {
+            "workspaceRegion": {
+             "value": "[reference('get-workspace-region').outputs.workspaceLocation.value]"
+            }
+           },
+           "template": {
+            "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+             "workspaceRegion": {
+              "type": "string"
+             }
+            },
+            "resources": [
+             {
+              "type": "Microsoft.Insights/dataCollectionRules",
+              "apiVersion": "2021-04-01",
+              "name": "[variables('dcrName')]",
+              "location": "[[parameters('workspaceRegion')]",
+              "properties": {
+               "description": "Data collection rule for VM Insights.",
+               "dataSources": {
+                "performanceCounters": [
+                 {
+                  "name": "VMInsightsPerfCounters",
+                  "streams": [
+                   "Microsoft-InsightsMetrics"
+                  ],
+                  "scheduledTransferPeriod": "PT1M",
+                  "samplingFrequencyInSeconds": 60,
+                  "counterSpecifiers": [
+                   "\\VmInsights\\DetailedMetrics"
+                  ]
+                 }
+                ],
+                "extensions": [
+                 {
+                  "streams": [
+                   "Microsoft-ServiceMap"
+                  ],
+                  "extensionName": "DependencyAgent",
+                  "extensionSettings": {},
+                  "name": "DependencyAgentDataSource"
+                 }
+                ]
+               },
+               "destinations": {
+                "logAnalytics": [
+                 {
+                  "workspaceResourceId": "[parameters('workspaceResourceId')]",
+                  "name": "VMInsightsPerf-Logs-Dest"
+                 }
+                ]
+               },
+               "dataFlows": [
+                {
+                 "streams": [
+                  "Microsoft-InsightsMetrics"
+                 ],
+                 "destinations": [
+                  "VMInsightsPerf-Logs-Dest"
+                 ]
+                },
+                {
+                 "streams": [
+                  "Microsoft-ServiceMap"
+                 ],
+                 "destinations": [
+                  "VMInsightsPerf-Logs-Dest"
+                 ]
+                }
+               ]
+              }
+             }
+            ]
+           }
+          }
+         },
+         {
+          "type": "Microsoft.Resources/deployments",
+          "name": "[variables('dcraDeployment')]",
+          "dependsOn": [
+           "[concat(variables('dcrDeployment'),'-DA')]",
+           "[concat(variables('dcrDeployment'),'-noDA')]"
+          ],
+          "apiVersion": "2020-06-01",
+          "resourceGroup": "[parameters('resourceGroup')]",
+          "properties": {
+           "mode": "Incremental",
+           "expressionEvaluationOptions": {
+            "scope": "inner"
+           },
+           "parameters": {
+            "vmName": {
+             "value": "[parameters('vmName')]"
+            },
+            "dcrId": {
+             "value": "[variables('dcrId')]"
+            },
+            "dcraName": {
+             "value": "[variables('dcraName')]"
+            }
+           },
+           "template": {
+            "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+             "vmName": {
+              "type": "string"
+             },
+             "dcrId": {
+              "type": "string"
+             },
+             "dcraName": {
+              "type": "string"
+             }
+            },
+            "variables": {},
+            "resources": [
+             {
+              "type": "Microsoft.HybridCompute/machines/providers/dataCollectionRuleAssociations",
+              "name": "[parameters('dcraName')]",
+              "apiVersion": "2019-11-01-preview",
+              "properties": {
+               "description": "Association of data collection rule for VMInsights. Deleting this association will stop the insights flow for this virtual machine.",
+               "dataCollectionRuleId": "[parameters('dcrId')]"
+              }
+             }
+            ]
+           }
+          }
+         }
+        ]
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Authorization/policyDefinitions/7c4214e9-ea57-487a-b38e-310ec09bc21d",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "7c4214e9-ea57-487a-b38e-310ec09bc21d"
+}

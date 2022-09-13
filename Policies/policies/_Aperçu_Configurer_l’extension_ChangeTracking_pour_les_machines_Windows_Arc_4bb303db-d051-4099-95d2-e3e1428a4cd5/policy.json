@@ -1,0 +1,182 @@
+{
+ "properties": {
+  "displayName": "[Aperçu]: Configurer l’extension ChangeTracking pour les machines Windows Arc",
+  "policyType": "BuiltIn",
+  "mode": "Indexed",
+  "description": "Configurez la machine Windows Arc pour installer automatiquement l’extension ChangeTracking afin d’activer le surveillance de l’intégrité des fichiers (FIM) dans Azure Security Center. FIM examine les fichiers du système d’exploitation, les registres Windows, les logiciels d’application, les fichiers système Linux, etc., à la recherche de modifications susceptibles d’indiquer une attaque. L’extension peut être installée sur des ordinateurs virtuels et des emplacements pris en charge par Azure Monitor Agent.",
+  "metadata": {
+   "version": "1.0.0-preview",
+   "category": "Security Center",
+   "preview": true
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Effet",
+     "description": "Activer ou désactiver l'exécution de la stratégie"
+    },
+    "allowedValues": [
+     "DeployIfNotExists",
+     "Disabled"
+    ],
+    "defaultValue": "DeployIfNotExists"
+   },
+   "listOfApplicableLocations": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "Emplacements applicables",
+     "description": "Liste des emplacements où la stratégie doit être appliquée.",
+     "strongType": "location"
+    },
+    "allowedValues": [
+     "australiasoutheast",
+     "australiaeast",
+     "brazilsouth",
+     "canadacentral",
+     "centralindia",
+     "centralus",
+     "eastasia",
+     "eastus2euap",
+     "eastus",
+     "eastus2",
+     "francecentral",
+     "japaneast",
+     "koreacentral",
+     "northcentralus",
+     "northeurope",
+     "norwayeast",
+     "southcentralus",
+     "southeastasia",
+     "switzerlandnorth",
+     "uaenorth",
+     "uksouth",
+     "westcentralus",
+     "westeurope",
+     "westus",
+     "westus2"
+    ],
+    "defaultValue": [
+     "australiasoutheast",
+     "australiaeast",
+     "brazilsouth",
+     "canadacentral",
+     "centralindia",
+     "centralus",
+     "eastasia",
+     "eastus2euap",
+     "eastus",
+     "eastus2",
+     "francecentral",
+     "japaneast",
+     "koreacentral",
+     "northcentralus",
+     "northeurope",
+     "norwayeast",
+     "southcentralus",
+     "southeastasia",
+     "switzerlandnorth",
+     "uaenorth",
+     "uksouth",
+     "westcentralus",
+     "westeurope",
+     "westus",
+     "westus2"
+    ]
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.HybridCompute/machines"
+     },
+     {
+      "field": "location",
+      "in": "[parameters('listOfApplicableLocations')]"
+     },
+     {
+      "field": "Microsoft.HybridCompute/imageOffer",
+      "like": "windows*"
+     }
+    ]
+   },
+   "then": {
+    "effect": "[parameters('effect')]",
+    "details": {
+     "type": "Microsoft.HybridCompute/machines/extensions",
+     "roleDefinitionIds": [
+      "/providers/microsoft.authorization/roleDefinitions/92aaf0da-9dab-42b6-94a3-d43ce8d16293"
+     ],
+     "existenceCondition": {
+      "allOf": [
+       {
+        "field": "Microsoft.HybridCompute/machines/extensions/type",
+        "equals": "ChangeTracking-Windows"
+       },
+       {
+        "field": "Microsoft.HybridCompute/machines/extensions/Publisher",
+        "equals": "Microsoft.Azure.ChangeTrackingAndInventory"
+       },
+       {
+        "field": "Microsoft.HybridCompute/machines/extensions/provisioningState",
+        "equals": "Succeeded"
+       }
+      ]
+     },
+     "deployment": {
+      "properties": {
+       "mode": "incremental",
+       "template": {
+        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": {
+         "vmName": {
+          "type": "string"
+         },
+         "location": {
+          "type": "string"
+         }
+        },
+        "variables": {
+         "vmExtensionName": "ChangeTracking-Windows",
+         "vmExtensionPublisher": "Microsoft.Azure.ChangeTrackingAndInventory",
+         "vmExtensionType": "ChangeTracking-Windows",
+         "vmExtensionTypeHandlerVersion": "1.0"
+        },
+        "resources": [
+         {
+          "name": "[concat(parameters('vmName'), '/', variables('vmExtensionName'))]",
+          "type": "Microsoft.HybridCompute/machines/extensions",
+          "location": "[parameters('location')]",
+          "apiVersion": "2021-06-10-preview",
+          "properties": {
+           "publisher": "[variables('vmExtensionPublisher')]",
+           "type": "[variables('vmExtensionType')]",
+           "typeHandlerVersion": "[variables('vmExtensionTypeHandlerVersion')]",
+           "autoUpgradeMinorVersion": true,
+           "settings": {},
+           "protectedSettings": {}
+          }
+         }
+        ]
+       },
+       "parameters": {
+        "vmName": {
+         "value": "[field('name')]"
+        },
+        "location": {
+         "value": "[field('location')]"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Authorization/policyDefinitions/4bb303db-d051-4099-95d2-e3e1428a4cd5",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "4bb303db-d051-4099-95d2-e3e1428a4cd5"
+}

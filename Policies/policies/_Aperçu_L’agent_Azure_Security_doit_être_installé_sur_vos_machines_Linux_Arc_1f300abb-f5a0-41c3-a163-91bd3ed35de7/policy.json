@@ -1,0 +1,66 @@
+{
+ "properties": {
+  "displayName": "[Aperçu]: L’agent Azure Security doit être installé sur vos machines Linux Arc",
+  "policyType": "BuiltIn",
+  "mode": "Indexed",
+  "description": "Installez l’agent Azure Security sur vos machines Linux Arc afin d’analyser les configurations de sécurité et les vulnérabilités de vos machines. Les résultats des évaluations peuvent être affichés et gérés dans Azure Security Center.",
+  "metadata": {
+   "category": "Security Center",
+   "version": "1.0.0-preview",
+   "preview": true
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Effet",
+     "description": "Activer ou désactiver l'exécution de la stratégie"
+    },
+    "allowedValues": [
+     "AuditIfNotExists",
+     "Disabled"
+    ],
+    "defaultValue": "AuditIfNotExists"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.HybridCompute/machines"
+     },
+     {
+      "field": "Microsoft.HybridCompute/imageOffer",
+      "like": "linux*"
+     }
+    ]
+   },
+   "then": {
+    "effect": "[parameters('effect')]",
+    "details": {
+     "type": "Microsoft.HybridCompute/machines/extensions",
+     "existenceCondition": {
+      "allOf": [
+       {
+        "field": "Microsoft.HybridCompute/machines/extensions/type",
+        "equals": "AzureSecurityLinuxAgent"
+       },
+       {
+        "field": "Microsoft.HybridCompute/machines/extensions/Publisher",
+        "equals": "Microsoft.Azure.Security.Monitoring"
+       },
+       {
+        "field": "Microsoft.HybridCompute/machines/extensions/provisioningState",
+        "equals": "Succeeded"
+       }
+      ]
+     }
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Authorization/policyDefinitions/1f300abb-f5a0-41c3-a163-91bd3ed35de7",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "1f300abb-f5a0-41c3-a163-91bd3ed35de7"
+}

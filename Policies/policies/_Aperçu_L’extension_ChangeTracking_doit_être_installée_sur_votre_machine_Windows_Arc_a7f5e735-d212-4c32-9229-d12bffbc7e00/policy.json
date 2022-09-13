@@ -1,0 +1,132 @@
+{
+ "properties": {
+  "displayName": "[Aperçu]: L’extension ChangeTracking doit être installée sur votre machine Windows Arc",
+  "policyType": "BuiltIn",
+  "mode": "Indexed",
+  "description": "Installez l’extension ChangeTracking sur les machines Windows Arc pour activer le surveillance de l’intégrité des fichiers (FIM) dans Azure Security Center. FIM examine les fichiers du système d’exploitation, les registres Windows, les logiciels d’application, les fichiers système Linux, etc., à la recherche de modifications susceptibles d’indiquer une attaque. L’extension peut être installée sur des ordinateurs virtuels et des emplacements pris en charge par Azure Monitoring Agent.",
+  "metadata": {
+   "version": "1.0.0-preview",
+   "category": "Security Center",
+   "preview": true
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Effet",
+     "description": "Activer ou désactiver l'exécution de la stratégie"
+    },
+    "allowedValues": [
+     "AuditIfNotExists",
+     "Disabled"
+    ],
+    "defaultValue": "AuditIfNotExists"
+   },
+   "listOfApplicableLocations": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "Emplacements applicables",
+     "description": "Liste des emplacements où la stratégie doit être appliquée.",
+     "strongType": "location"
+    },
+    "allowedValues": [
+     "australiasoutheast",
+     "australiaeast",
+     "brazilsouth",
+     "canadacentral",
+     "centralindia",
+     "centralus",
+     "eastasia",
+     "eastus2euap",
+     "eastus",
+     "eastus2",
+     "francecentral",
+     "japaneast",
+     "koreacentral",
+     "northcentralus",
+     "northeurope",
+     "norwayeast",
+     "southcentralus",
+     "southeastasia",
+     "switzerlandnorth",
+     "uaenorth",
+     "uksouth",
+     "westcentralus",
+     "westeurope",
+     "westus",
+     "westus2"
+    ],
+    "defaultValue": [
+     "australiasoutheast",
+     "australiaeast",
+     "brazilsouth",
+     "canadacentral",
+     "centralindia",
+     "centralus",
+     "eastasia",
+     "eastus2euap",
+     "eastus",
+     "eastus2",
+     "francecentral",
+     "japaneast",
+     "koreacentral",
+     "northcentralus",
+     "northeurope",
+     "norwayeast",
+     "southcentralus",
+     "southeastasia",
+     "switzerlandnorth",
+     "uaenorth",
+     "uksouth",
+     "westcentralus",
+     "westeurope",
+     "westus",
+     "westus2"
+    ]
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.HybridCompute/machines"
+     },
+     {
+      "field": "location",
+      "in": "[parameters('listOfApplicableLocations')]"
+     },
+     {
+      "field": "Microsoft.HybridCompute/imageOffer",
+      "like": "windows*"
+     }
+    ]
+   },
+   "then": {
+    "effect": "[parameters('effect')]",
+    "details": {
+     "type": "Microsoft.HybridCompute/machines/extensions",
+     "existenceCondition": {
+      "allOf": [
+       {
+        "field": "Microsoft.HybridCompute/machines/extensions/type",
+        "equals": "ChangeTracking-Windows"
+       },
+       {
+        "field": "Microsoft.HybridCompute/machines/extensions/Publisher",
+        "equals": "Microsoft.Azure.ChangeTrackingAndInventory"
+       },
+       {
+        "field": "Microsoft.HybridCompute/machines/extensions/provisioningState",
+        "equals": "Succeeded"
+       }
+      ]
+     }
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Authorization/policyDefinitions/a7f5e735-d212-4c32-9229-d12bffbc7e00",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "a7f5e735-d212-4c32-9229-d12bffbc7e00"
+}

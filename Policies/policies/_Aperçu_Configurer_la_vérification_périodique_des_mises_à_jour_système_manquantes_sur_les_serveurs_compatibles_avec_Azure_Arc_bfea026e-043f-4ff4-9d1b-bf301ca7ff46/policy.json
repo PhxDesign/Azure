@@ -1,0 +1,156 @@
+{
+ "properties": {
+  "displayName": "[Aperçu]: Configurer la vérification périodique des mises à jour système manquantes sur les serveurs compatibles avec Azure Arc",
+  "policyType": "BuiltIn",
+  "mode": "Indexed",
+  "description": "Configurez l’évaluation automatique (toutes les 24 heures) pour les mises à jour du système d’exploitation sur Azure Arc serveurs. Vous pouvez contrôler l’étendue de l’affectation en fonction de l’abonnement de l’ordinateur, du groupe de ressources, de l’emplacement ou de la balise. En savoir plus à ce sujet pour Windows : https://aka.ms/computevm-windowspatchassessmentmode, pour Linux : https://aka.ms/computevm-linuxpatchassessmentmode.",
+  "metadata": {
+   "version": "1.1.0-preview",
+   "category": "Update Management Center",
+   "preview": true
+  },
+  "parameters": {
+   "assessmentMode": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Mode d’évaluation",
+     "description": "Mode d’évaluation pour les machines."
+    },
+    "allowedValues": [
+     "ImageDefault",
+     "AutomaticByPlatform"
+    ],
+    "defaultValue": "AutomaticByPlatform"
+   },
+   "osType": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Type de système d'exploitation",
+     "description": "Type de système d’exploitation pour les ordinateurs."
+    },
+    "allowedValues": [
+     "Windows",
+     "Linux"
+    ],
+    "defaultValue": "Windows"
+   },
+   "locations": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "Emplacements des ordinateurs",
+     "description": "Liste des emplacements à partir desquels les machines doivent être ciblées.",
+     "strongType": "location"
+    },
+    "defaultValue": []
+   },
+   "tagValues": {
+    "type": "Object",
+    "metadata": {
+     "displayName": "Balises sur les ordinateurs",
+     "description": "Liste des balises à mettre en correspondance pour obtenir les machines cibles."
+    },
+    "defaultValue": {}
+   },
+   "tagOperator": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Opérateur d'étiquette",
+     "description": "Condition de correspondance pour les balises de ressource"
+    },
+    "allowedValues": [
+     "All",
+     "Any"
+    ],
+    "defaultValue": "Any"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.HybridCompute/machines"
+     },
+     {
+      "field": "Microsoft.HybridCompute/machines/osName",
+      "equals": "[parameters('osType')]"
+     },
+     {
+      "anyOf": [
+       {
+        "value": "[empty(parameters('locations'))]",
+        "equals": true
+       },
+       {
+        "field": "location",
+        "in": "[parameters('locations')]"
+       }
+      ]
+     },
+     {
+      "field": "[if(equals(parameters('osType'), 'Windows'), 'Microsoft.HybridCompute/machines/osProfile.windowsConfiguration.patchSettings.assessmentMode', 'Microsoft.HybridCompute/machines/osProfile.linuxConfiguration.patchSettings.assessmentMode')]",
+      "notEquals": "[parameters('assessmentMode')]"
+     },
+     {
+      "anyOf": [
+       {
+        "value": "[empty(parameters('tagValues'))]",
+        "equals": true
+       },
+       {
+        "allOf": [
+         {
+          "value": "[parameters('tagOperator')]",
+          "equals": "Any"
+         },
+         {
+          "value": "[greaterOrEquals(if(empty(field('tags')), 0, length(intersection(parameters('tagValues'), field('tags')))), 1)]",
+          "equals": true
+         }
+        ]
+       },
+       {
+        "allOf": [
+         {
+          "value": "[parameters('tagOperator')]",
+          "equals": "All"
+         },
+         {
+          "value": "[equals(if(empty(field('tags')), 0, length(intersection(parameters('tagValues'), field('tags')))), length(parameters('tagValues')))]",
+          "equals": true
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "then": {
+    "effect": "modify",
+    "details": {
+     "roleDefinitionIds": [
+      "/providers/Microsoft.Authorization/roleDefinitions/cd570a14-e51a-42ad-bac8-bafd67325302"
+     ],
+     "conflictEffect": "audit",
+     "operations": [
+      {
+       "condition": "[equals(parameters('osType'), 'Windows')]",
+       "operation": "addOrReplace",
+       "field": "Microsoft.HybridCompute/machines/osProfile.windowsConfiguration.patchSettings.assessmentMode",
+       "value": "[parameters('assessmentMode')]"
+      },
+      {
+       "condition": "[equals(parameters('osType'), 'Linux')]",
+       "operation": "addOrReplace",
+       "field": "Microsoft.HybridCompute/machines/osProfile.linuxConfiguration.patchSettings.assessmentMode",
+       "value": "[parameters('assessmentMode')]"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Authorization/policyDefinitions/bfea026e-043f-4ff4-9d1b-bf301ca7ff46",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "bfea026e-043f-4ff4-9d1b-bf301ca7ff46"
+}
