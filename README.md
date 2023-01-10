@@ -1,2 +1,2 @@
 # Azure
-Repo principal pour des services Microsoft Azure.
+Repo principal pour les services Microsoft Azure.
