@@ -1,12 +1,9 @@
----
-title: Azure Fundamentals - Types de services cloud
-description: Résumé de la formation Azure Fundamentals
-author: PhxDesign
-ms.author: jlgauthier
-ms.topic: overview
-ms.date: 01/05/2023
-ms.custom: template-overview
----
+[//]: # (title: Azure Fundamentals - Types de services cloud)
+[//]: # (description: Résumé de la formation Azure Fundamentals)
+[//]: # (author: PhxDesign)
+[//]: # (ms.author: jlgauthier)
+[//]: # (ms.topic: Types de services cloud)
+[//]: # (ms.date: 01/05/2023)
 
 # Azure Fundamentals - Types des services cloud
 
@@ -74,3 +71,5 @@ Vos responsabilités:
 
 1. Quel type de service cloud est le plus adapté à une migration lift-and-shift?
 2. Dans quel type de service cloud retrouve-t-on une solution de gestion financière et de suivi des dépenses?
+
+[Prochain module - Les principaux composants architecturaux](05-Principaux_composants_architecturaux.md)

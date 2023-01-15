@@ -1,12 +1,9 @@
----
-title: Azure Fundamentals - Avantages des services cloud
-description: Résumé de la formation Azure Fundamentals
-author: PhxDesign
-ms.author: jlgauthier
-ms.topic: overview
-ms.date: 01/05/2023
-ms.custom: template-overview
----
+[//]: # (title: Azure Fundamentals - Avantages des services cloud)
+[//]: # (description: Résumé de la formation Azure Fundamentals)
+[//]: # (author: PhxDesign)
+[//]: # (ms.author: jlgauthier)
+[//]: # (ms.topic: Avantages des services cloud)
+[//]: # (ms.date: 01/05/2023)
 
 # Azure Fundamentals - Avantages des services cloud
 
@@ -55,3 +52,5 @@ La gestion dans le cloud indique la façon dont vous pouvez gérer votre environ
 - Via une interface de ligne de commande.
 - Via des API.
 - En utilisant PowerShell.
+
+[Prochain module - Types de services cloud](03-Types_de_services_cloud.md)
