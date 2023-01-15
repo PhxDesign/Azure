@@ -32,7 +32,7 @@ It's is a tool that an organization uses to collect, analyze, and perform securi
 - Incident management
 - Querying data
 
-#### What is Microsoft Sentinel
+#### What is Microsoft Sentinel?
 
 It's a cloud-native SIEM that a SOT can use for:
 
@@ -49,7 +49,7 @@ IT helps you enable end-to-end security operations including collection, detecti
 
 ### How Microsoft Sentinel works
 
-#### Data conectors
+#### Data connectors
 
 Microsoft Sentinel ingests information from data connectors linked to services like:
 
@@ -83,7 +83,7 @@ An incident is created when an alert that you've enabled is triggered. you can d
 
 You can automate some of your security operations and make your SOC more productive. Sentinel integrates with Azure Logic Apps, enabling you to create automated workflows, or playbooks, in response to events. These capabilities are often referred to as security orchestration, automation, and response (SOAR).
 
-****Possibilities****
+**Possibilities**
 
 - Ingest data from your cloud and on-premises environments.
 - Perform analytics on that data.
@@ -138,7 +138,7 @@ Clear requierments from the organization:
 
 #### Implementation options
 
-****Single-Tenant with a single Microsoft Sentinel Workspace****
+**Single-Tenant with a single Microsoft Sentinel Workspace**
 
 Receives logs from resources in other regions within the same tenant.
 
@@ -151,7 +151,7 @@ Receives logs from resources in other regions within the same tenant.
 |Microsoft Sentinel RBAC for service RBAC|
 |
 
-****Single-Tenant with regional Microsoft Sentinel Workspaces****
+**Single-Tenant with regional Microsoft Sentinel Workspaces**
 
 Will have multiple Sentinel workspaces requiring the creation and configuration of multiple Microsoft Sentinel and Log Analytics workspaces.
 
@@ -165,12 +165,13 @@ Will have multiple Sentinel workspaces requiring the creation and configuration 
 |
 
 > To query data across workspaces, use the workspace() function before the table name, ex:
->
-> Tablename
->
-> | union workspace("WorkspaceName").TableName
 
-****Multi-Tenant****
+~~~kql
+    Tablename
+    | union workspace("WorkspaceName").TableName
+~~~
+
+**Multi-Tenant**
 
 You implement Microsoft Sentinel workspace in multiple-tenant using Azure Lighthouse.
 
@@ -178,14 +179,14 @@ You implement Microsoft Sentinel workspace in multiple-tenant using Azure Lighth
 
 ### Create a Microsoft Sentinel workspace
 
-****Requiers****
+**Requiers**
 
 - To enable: contributor permissions to the subscription in which the Microsoft Sentinel workspace resides.
 - To use: need either contributor or reader permissions on the resource group that the workspace belongs.
 
 #### Create and configure a Log Analytics workspace
 
-****Add Microsoft Sentinel to a workspace****
+**Add Microsoft Sentinel to a workspace**
 
 Need a Log Analytics Workspace and you can create one when adding Microsoft Sentiel. The LAW requiers:
 
@@ -259,8 +260,8 @@ Data retention at the workspace level can be configured from 30 to 730 days (two
 > You can adjust the retention days for a table through the workspace settings in the Microsoft Sentinel Settings area.
 
 #### Configure logs
-Data in each table in a Log Analytics workspace is retained for a specified period of time after which it's either removed or archived with a reduced retention fee.
 
+Data in each table in a Log Analytics workspace is retained for a specified period of time after which it's either removed or archived with a reduced retention fee.
 
 ****Log types****
 
@@ -356,7 +357,7 @@ DeviceNetworkEvents| Network connection and related events
 DeviceNetworkInfo| Network properties of devices, including physical adapters, IP and MAC addresses, as well as connected networks and domains
 DeviceProcessEvents| Process creation and related events
 DeviceRegistryEvents| Creation and modification of registry entries
-EmailEvents Microsoft 365 email events, including email delivery and blocking events
+EmailEvents| Microsoft 365 email events, including email delivery and blocking events
 EmailPostDeliveryEvents| Security events that occur post-delivery, after Microsoft 365 has delivered the emails to the recipient mailbox
 EmailUrlInfo| Information about URLs on emails
 EmailAttachmentInfo| Information about files attached to Office 365 emails
@@ -365,13 +366,19 @@ IdentityLogonEvents| Authentication events on Active Directory and Microsoft onl
 IdentityQueryEvents| Queries for Active Directory objects, such as users, groups, devices, and domains
 |
 
-### Knowledge check
-
-- Which table stores Defender for Endpoint logon events?
-  - DeviceLogonEvents
-- What table contains logs from Windows hosts collected directly to Microsoft Sentinel?
-  - SecurityEvent
-- Which table stores Alerts from Microsoft Defender for Endpoint?
-  - SecurityAlert
+<details><summary><b>Knowledge check</b></summary>
+1. Which table stores Defender for Endpoint logon events?
+    <details><summary>Answer</summary>
+    DeviceLogonEvents
+    </details>
+2. What table contains logs from Windows hosts collected directly to Microsoft Sentinel?
+    <details><summary>Answer</summary>
+    SecurityEvent
+    </details>
+3. Which table stores Alerts from Microsoft Defender for Endpoint?
+    <details><summary>Answer</summary>
+    SecurityAlert
+    </details>
+</details>
 
 ## Use watchlists in Microsoft Sentinel
