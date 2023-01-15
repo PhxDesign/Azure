@@ -72,4 +72,4 @@ Vos responsabilités:
 1. Quel type de service cloud est le plus adapté à une migration lift-and-shift?
 2. Dans quel type de service cloud retrouve-t-on une solution de gestion financière et de suivi des dépenses?
 
-[Prochain module - Les principaux composants architecturaux](05-Principaux_composants_architecturaux.md)
+[Prochain module - Les principaux composants architecturaux](04-Principaux_composants_architecturaux.md)
