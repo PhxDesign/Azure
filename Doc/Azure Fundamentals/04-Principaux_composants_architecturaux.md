@@ -1,18 +1,15 @@
----
-title: Azure Fundamentals - Les principaux composants architecturaux
-description: Résumé de la formation Azure Fundamentals
-author: PhxDesign
-ms.author: jlgauthier
-ms.topic: overview
-ms.date: 01/05/2023
-ms.custom: template-overview
----
+[//]: # (title: Azure Fundamentals - Les principaux composants architecturaux)
+[//]: # (description: Résumé de la formation Azure Fundamentals)
+[//]: # (author: PhxDesign)
+[//]: # (ms.author: jlgauthier)
+[//]: # (ms.topic: Les principaux composants architecturaux)
+[//]: # (ms.date: 01/05/2023)
 
 # Azure Fundamentals - Les principaux composants architecturaux
 
 Condensé sur la formation Azure Fundamentals permettant d'obtenir la certification AZ-900.
 
-## Qu'est-ce que Azure
+## Qu'est-ce qu'Azure
 
 Azure est un ensemble de services cloud en constante évolution qui vous aide à faire face aux défis actuels et futurs de l’entreprise. Il vous offre la possibilité de créer, gérer et déployer des applications sur un réseau de dimension mondiale avec vos outils et frameworks préférés.
 
@@ -41,13 +38,13 @@ Pour utiliser les services Azure, un compte doit être créé afin d'y ajouter u
 
 - Bac à sable Microsoft Learn
 
-    La technologie de bac à sable créee un abonnement temporaire et l’ajoute à votre compte Azure, ce qui permet de créer des ressources Azure dans le cadre d’un module Learn et de les nettoyer automatiquement une fois que vous avez terminé le module.
+    La technologie de bac à sable crée un abonnement temporaire et l’ajoute à votre compte Azure, ce qui permet de créer des ressources Azure dans le cadre d’un module Learn et de les nettoyer automatiquement une fois que vous avez terminé le module.
 
 ## Décrire l'infrastructure physique
 
 ### Infrastructure physique
 
-À la base de l’infrastructure physique d’Azure se trouvent les centres de données, dont les ressources sont organisées dans des racks, avec une alimentation, un système de refroidissement et une infrastructure réseau dédiés. Cependant, ces centres de données individuels ne sont pas directement accessibles, ils sont regroupés dans des régions ou des zones de disponibilité conçues pour  bénéficier d’une résilience et d’une fiabilité vitales pour les charges de travail.
+À la base de l’infrastructure physique d’Azure se trouvent les centres de données, dont les ressources sont organisées dans des racks, avec une alimentation, un système de refroidissement et une infrastructure réseau dédiée. Cependant, ces centres de données individuels ne sont pas directement accessibles, ils sont regroupés dans des régions ou des zones de disponibilité conçues pour  bénéficier d’une résilience et d’une fiabilité vitales pour les charges de travail.
 
 #### Régions
 
@@ -60,13 +57,13 @@ Une région est une zone géographique constituée d’au moins un centre de don
 
 Les zones de disponibilité sont des centres de données physiquement séparés au sein d’une région. Chaque zone de disponibilité est composée d’un ou de plusieurs centres de données équipés d’une alimentation, d’un refroidissement et d’un réseau indépendants et constitue une limite d'isolation.
 
-Les zones de disponibilité sont utilisées principalement pour les machines virtuelles, les disques managés, les équilibreurs de charge et les bases de données SQL puis classés en trois catégories:
+Les zones de disponibilité sont utilisées principalement pour les machines virtuelles, les disques gérés, les équilibreurs de charge et les bases de données SQL puis classées en trois catégories:
 
 - Services zonaux: vous épinglez la ressource à une zone spécifique.
 - Services redondants interzones: la plateforme effectue automatiquement une réplication entre des zones.
-- Services non régionnaux: les services sont toujours disponibles à partir de zones géographiques et sont résilients aux pannes à l’échelle de la zone ainsi qu’aux pannes à l’échelle de la région.
+- Services non régionaux: les services sont toujours disponibles à partir de zones géographiques et sont résilients aux pannes à l’échelle de la zone ainsi qu’aux pannes à l’échelle de la région.
 
-> Les régions qui ont des zones de disponibilité ont au moins trois zones disctinctes.
+> Les régions qui ont des zones de disponibilité ont au moins trois zones distinctes.
 
 ****Avantages****
 
@@ -89,7 +86,7 @@ La plupart des régions Azure sont associées à une autre région au sein d’u
 Les régions souveraines sont des instances d’Azure isolées de l’instance principale d’Azure.
 
 - US DoD Centre, US Gov Virginie, US Gov Iowa, etc.: ces centres de données sont gérés par un personnel autorisé aux États-Unis et incluent des certifications de conformité supplémentaires.
-- Chine Est, Chine Nord, etc.: ces régions sont disponibles via un partenariat unique conclu entre Microsoft et 21Vianet, qui stipule que Microsoft ne gère pas directement les centres de données.
+- Chine Est, Chine Nord, etc.: ces régions sont disponibles via un partenariat unique conclu entre Microsoft et 21Vianet, qui stipulent que Microsoft ne gère pas directement les centres de données.
 
 ## Décrire l'infrastructure de gestion
 
@@ -98,11 +95,12 @@ L’infrastructure de gestion comprend des ressources et des groupes de ressourc
 ### Ressources et groupes de ressources
 
 #### Ressource
-Une ressource est le bloc de construction de base que vous créez, provisionnez, déployez, etc. dans Azure, tel les machines virtuelles, les réseaux virtuels, les bases de données, les services cognitifs, etc.
+
+Une ressource est le bloc de construction de base que vous créez, provisionnez, déployez, etc. dans Azure, tels les machines virtuelles, les réseaux virtuels, les bases de données, les services cognitifs, etc.
 
 #### Groupe de ressources
 
-Un groupe de ressources est simplement un regroupements d'une ou plusieurs ressources. Un groupe de ressource ne peut être imbriqué dans un autre groupe et chaque ressource appartient à un seul groupe de ressource.
+Un groupe de ressources est simplement un regroupement d'une ou plusieurs ressources. Un groupe de ressource ne peut être imbriqué dans un autre groupe et chaque ressource appartient à un seul groupe de ressource.
 
 Les groupes de ressources offrent un moyen pratique de regrouper des ressources. Quand vous appliquez une action à un groupe de ressources, cette action s’applique à toutes les ressources actuelles et futures contenues dans le groupe de ressources.
 
@@ -138,15 +136,15 @@ Les groupes d’administration Azure fournissent un niveau d’étendue au-delà
 - Tous les abonnements contenus dans un groupe d’administration héritent automatiquement des conditions appliquées au groupe d’administration.
 - Les groupes d’administration peuvent être imbriqués.
 
-### Groupe d'administration, abonnements et hiéarchie de groupes de ressources
+### Groupe d'administration, abonnements et hiérarchie de groupes de ressources
 
 Comment utiliser les groupes d'administration?
 
-* Créer une hiéarchie qui applique une stratégie
+- Créer une hiérarchie qui applique une stratégie
 
     Vous pouvez limiter la localisation des ressources à une ou certaines régions spécifiques afin de répondre à des règles de conformité.
 
-* Fournir aux utilisateurs un accès à plusieurs abonnements
+- Fournir aux utilisateurs un accès à plusieurs abonnements
 
     Vous pouvez créer une affectation de contrôle d’accès en fonction du rôle (RBAC) dans le groupe d’administration, ainsi tous les sous-groupes d’administration, abonnements, groupes de ressources et ressources relevant de ce groupe d’administration hériteraient également de ces autorisations.
 
@@ -168,7 +166,7 @@ Les machines virtuelles fournissent une infrastructure IaaS (infrastructure as a
 - Exécuter des logiciels personnalisés.
 - Utiliser des configurations d’hébergement personnalisées.
 
-Vous pouvez créer et provisionner une machine virtuelle en quelques minutes quand vous sélectionnez une image de machine virtuelle préconfigurée, étant un modèle pouvant déjà inclure un système d’exploitation et d’autres logiciels, tels que des outils de développement ou des environnements d’hébergement web.
+Vous pouvez créer et provisionner une machine virtuelle en quelques minutes quand vous sélectionnez une image de machine virtuelle préconfigurée, étant un modèle pouvant déjà inclure un système d’exploitation et d’autres logiciels, tel que des outils de développement ou des environnements d’hébergement web.
 
 #### Mise à l'échelle des machines virtuelles
 
@@ -207,7 +205,7 @@ lorsque vous passez d’un serveur physique au cloud, vous pouvez créer une ima
 #### Ressources de machine virtuelle
 
 - ****La taille**** (objet, nombre de coeurs de processeur et quantité de ram)
-- ****Les disque de stockage**** (disques durs, SSD, etc.)
+- ****Les disques de stockage**** (disques durs, SSD, etc.)
 - ****Le réseau**** (réseau virtuel, adresse IP publique et configuration de port)
 
 ### Décrire Azure Virtual Desktop
@@ -228,7 +226,7 @@ Les conteneurs constituent un excellent choix si vous souhaitez exécuter plusie
 
 #### Qu'est-ce que les conteneurs
 
-Les conteneurs constituent un environnement de virtualisation. Vous pouvez exécuter plusieurs conteneurs sur un seul hôte physique ou virtuel. Ils sont sont légers et conçus pour être créés, mis à l’échelle (scale-out) et arrêtés de façon dynamique, ils s’avèrent être une méthode plus légère et plus agile.
+Les conteneurs constituent un environnement de virtualisation. Vous pouvez exécuter plusieurs conteneurs sur un seul hôte physique ou virtuel. Ils sont légers et conçus pour être créés, mis à l’échelle (scale-out) et arrêtés de façon dynamique, ils s’avèrent être une méthode plus légère et plus agile.
 
 - Permet de répondre aux modifications à la demande.
 - Possibilité de redémarrer rapidement en cas d'incident ou d'interruption matérielle.
@@ -252,7 +250,7 @@ Azure Functions est une option de calcul serverless pilotée par les événement
 
 ****Avantages****
 
-- Idéal quand votre seule préoccupation est le code qui exécute votre service et non la plateforme ou l’infrastructure sous-jacentes.
+- Idéal quand votre seule préoccupation est le code qui exécute votre service et non la plateforme ou l’infrastructure sous-jacente.
 - Se met à l’échelle automatiquement en fonction de la demande.
 - Exécute votre code quand il est déclenché et libère automatiquement les ressources lorsque la fonction est terminée.
 - Peuvent être sans état (par défaut) pour se comporter comme si elles étaient redémarrées chaque fois ou avec état (Durable Function) lorsqu'un contexte est transmis via la fonction pour effectuer le suivi de l’activité précédente.
@@ -281,7 +279,7 @@ App Service vous permet de créer et d’héberger des applications web, des tâ
 - ****Applications API:**** vous pouvez générer des API web REST en utilisant le langage et l’infrastructure de votre choix, incluant la prise en charge complète de Swagger, vous pouvez empaqueter et publier votre API sur la Place de marché Azure.
 - ****Webjobs:**** pour exécuter un programme (.exe, Java, PHP, Python ou Node.js) ou un script (.cmd, .bat, PowerShell ou Bash) dans le même contexte qu’une application web, une application API ou une application mobile.
 - ****Applications mobiles:**** la fonctionnalité Mobile Apps d’App Service pour créer rapidement un back-end pour les applications iOS et Android tel que:
-    - Stocker les données d’application mobile dans une base de données SQL basée sur le cloud.
+  - Stocker les données d’application mobile dans une base de données SQL basée sur le cloud.
   - Authentifier les clients par rapport à des fournisseurs de réseaux sociaux courants comme MSA, Google, Twitter et Facebook.
   - Envoyer des notifications Push.
   - Exécuter une logique de back-end personnalisée en C# ou Node.js.
@@ -302,7 +300,7 @@ possibilité d'activer les connexions entrantes depuis Internet en attribuant un
 Il existe deux méthodes permettant aux ressources Azure de communiquer entre elles en toute sécurité
   - Les réseaux virtuels
   - Les points de terminaison de service
-- ****Communiquer avec des ressources locales:**** lier des ressources ensemble dans votre environnement local et au sein de votre abonnement Azure via trois mécanisme
+- ****Communiquer avec des ressources locales:**** lier des ressources ensemble dans votre environnement local et au sein de votre abonnement Azure via trois mécanismes
   - Les connexions de réseau privé virtuel point à site (ordinateur extérieur à votre réseau d’entreprise).
   - Les réseaux privés virtuels de site à site (un appareil VPN local ou votre passerelle à la passerelle VPN Azure sur un réseau virtuel).
   - Azure ExpressRoute (connectivité privée dédiée vers Azure qui ne passe pas par Internet).
@@ -312,7 +310,7 @@ Il existe deux méthodes permettant aux ressources Azure de communiquer entre el
   - Le protocole BGP
 
 - ****Filtrer le trafic:****
-possiblité de filter le traffic entre des sous-réseaux à l'aide des approches
+possibilité de filtrer le trafic entre des sous-réseaux à l'aide des approches
   - Les groupes de sécurité réseau (peuvent contenir plusieurs règles de sécurité d’entrée et de sortie).
   - Les appliances virtuelles réseau (machines virtuelles spécialisées remplissant une fonction réseau particulière, comme exécuter un pare-feu ou effectuer une optimisation WAN).
 
@@ -340,7 +338,7 @@ Les instances Passerelle VPN Azure sont déployées dans un sous-réseau dédié
 
 > Vous pouvez déployer une seule passerelle VPN dans chaque réseau virtuel. En revanche, vous pouvez utiliser une même passerelle pour vous connecter à plusieurs emplacements.
 
-Il existe deux type de passerelles VPN, soit:
+Il existe deux types de passerelles VPN, soit:
 
 - Les passerelles VPN basées sur une stratégie spécifient de manière statique l’adresse IP des paquets qui doivent être chiffrés via chaque tunnel.
 - Dans les passerelles basées sur une route, les tunnels IPSec sont modélisés sous forme d’interface réseau ou d’interface de tunnel virtuel. Le routage IP détermine quelle interface de tunnel utiliser pour envoyer chaque paquet. Elles sont recommandées pour:
@@ -368,7 +366,8 @@ Il existe une autre possibilité de haute disponibilité, qui consiste à config
 Dans les régions qui prennent en charge les zones de disponibilité, les passerelles VPN et ExpressRoute peuvent être déployées dans une configuration redondante interzone. Ces passerelles ont besoin de différentes références SKU et utilisent des adresses IP publiques Standard au lieu d’adresses IP publiques De base.
 
 ### Décrire Azure ExpressRoute
-permet d’étendre vos réseaux locaux dans le cloud Microsoft via une connexion privée, avec l’aide d’un fournisseur de connectivité. Chaque emplacement a son propre circuit ExpressRoute. La connectivité peut provenir d’un réseau universel (IP VPN), d’un réseau Ethernet point à point ou d’une interconnexion virtuelle via un fournisseur de connectivité dans un centre de colocalisation.
+
+Permet d’étendre vos réseaux locaux dans le cloud Microsoft via une connexion privée, avec l’aide d’un fournisseur de connectivité. Chaque emplacement a son propre circuit ExpressRoute. La connectivité peut provenir d’un réseau universel (IP VPN), d’un réseau Ethernet point à point ou d’une interconnexion virtuelle via un fournisseur de connectivité dans un centre de colocalisation.
 
 ****Avantages****
 
@@ -386,13 +385,13 @@ permet d’étendre vos réseaux locaux dans le cloud Microsoft via une connexio
 - ****Colocation CloudExchange:****
 si votre installation est colocalisée dans un échange cloud, vous pouvez demander une connexion croisée virtuelle au cloud Microsoft.
 - ****Connexions Ethernet point à point:****
-une connexion ethernet point à point fait référence à l’utilisation d’une connexion point à point pour connecter votre installation au cloud Microsoft.
+une connexion Ethernet point à point fait référence à l’utilisation d’une connexion point à point pour connecter votre installation au cloud Microsoft.
 - ****Connexion universelle:****
 avec une connectivité Any-To-Any, vous pouvez intégrer votre réseau étendu (WAN) à Azure en établissant des connexions avec vos bureaux et centres de données.
 - ****Directement à partir de sites ExpressRoute:****
 offre une double connectivité de 100 Gbits/s ou 10 Gbits/s qui prend en charge la connectivité Active/Active à grande échelle.
 
-#### Considération relatives à la sécurité
+#### Considération relative à la sécurité
 
 ExpressRoute est une connexion privée entre votre infrastructure locale et votre infrastructure Azure. Même si vous disposez d’une connexion ExpressRoute, les requêtes DNS, la vérification de la liste de révocation des certificats et les demandes de réseau de diffusion de contenu sont quand même envoyées via l’Internet public.
 
@@ -421,3 +420,5 @@ Cette fonctionnalité vous permet d’utiliser vos propres noms de domaine perso
 Vous pouvez utiliser un jeu d’enregistrements d’alias pour référencer une ressource Azure, comme une adresse IP publique Azure, un profil Azure Traffic Manager ou point de terminaison Azure Content Delivery Network.
 
 > Vous ne pouvez pas utiliser Azure DNS pour acheter un nom de domaine.
+
+[Retour au premier module - Cloud computing](01-Cloud_Computing.md)

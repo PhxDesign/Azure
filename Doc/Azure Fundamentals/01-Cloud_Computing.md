@@ -1,12 +1,9 @@
----
-title: Azure Fundamentals - Cloud computing
-description: Résumé de la formation Azure Fundamentals
-author: PhxDesign
-ms.author: jlgauthier
-ms.topic: overview
-ms.date: 01/05/2023
-ms.custom: template-overview
----
+[//]: # (title: Azure Fundamentals - Cloud computing)
+[//]: # (description: Condensé de la formation Azure Fundamentals)
+[//]: # (author: PhxDesign)
+[//]: # (ms.author: jlgauthier)
+[//]: # (ms.topic: Cloud computing)
+[//]: # (ms.date: 01/15/2023)
 
 # Azure Fundamentals - Cloud computing
 
@@ -41,6 +38,8 @@ Dans le même temps, le consommateur est responsable des données et des informa
 - Applications
 - Identité et infrastructure
 
+    ![Tableau des responsabilités partagées](images/01-CC-SharedResponsabilityModel.png)
+
 ## Définir le modèle cloud
 
 ****Cloud public :**** Un cloud public est créé, contrôlé et géré par un fournisseur de cloud tiers.
@@ -70,7 +69,6 @@ Le cloud computing fonctionne selon un modèle basé sur la consommation. Avec l
 - Possibilité de cesser de payer pour les ressources qui ne sont plus nécessaires.
 
 ## Validation des connaissances
-<!-- add your content here -->
 
 ## Ressources supplémentaires
 
@@ -79,3 +77,5 @@ Les ressources suivantes fournissent plus d’informations sur les rubriques con
 - [Modèle de responsabilité partagée](https://learn.microsoft.com/fr-fr/azure/security/fundamentals/shared-responsibility) - Le modèle de responsabilité partagée est un partage des responsabilités au niveau du cloud entre vous et votre fournisseur de cloud.
 - [Présentation d’Azure VMware Solution](https://learn.microsoft.com/fr-fr/training/modules/intro-azure-vmware-solution/) est un cours Microsoft Learn qui approfondit la découverte d’Azure VMware Solution.
 - [Présentation des services liés au cloud hybride Azure](https://learn.microsoft.com/fr-fr/training/modules/intro-to-azure-hybrid-services/) est un cours Microsoft Learn qui explique plus en détail le cloud hybride.
+
+[Prochain module - Avantages des services cloud](02-Avantages_des_services_cloud.md)
