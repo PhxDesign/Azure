@@ -1,14 +1,13 @@
----
-title: SC-200 Security Operations Analyst - Configure your Microsoft Sentinel environment
-description: Résumé de la formation Azure Fundamentals
-author: PhxDesign
-ms.author: jlgauthier
-ms.topic: overview
-ms.date: 01/1405/2023
-ms.custom: template-overview
----
+[//]: # (title: SC-200 Security Operations Analyst - Configure your Microsoft Sentinel environment)
+[//]: # (description: Résumé de la formation Azure Fundamentals)
+[//]: # (author: PhxDesign)
+[//]: # (ms.author: jlgauthier)
+[//]: # (ms.topic: Configure your Microsoft Sentinel environment)
+[//]: # (ms.date: 01/14/2023)
 
 # SC-200 Security Operations Analyst - Configure your Microsoft Sentinel environment
+
+Microsoft Learn training digest to take the SC-200 Security Operations Analyst exam.
 
 ## Introduction to Microsoft Sentinel
 
@@ -24,7 +23,7 @@ It's is a tool that an organization uses to collect, analyze, and perform securi
 - Do some form of correlation or anomaly detection.
 - Create alerts and incidents based on your findings.
 
-****Potentials functionalities****
+****Potential functionalities****
 
 - Log management
 - Alerting
@@ -51,7 +50,7 @@ IT helps you enable end-to-end security operations including collection, detecti
 
 #### Data connectors
 
-Microsoft Sentinel ingests information from data connectors linked to services like:
+Microsoft Sentinel ingests information from data connectors linked to services like
 
 - syslog
 - Common Event Format (CEF)
@@ -65,7 +64,7 @@ Your data is stored by using Log Analytics and include the ability to use the Ku
 
 #### Workbooks
 
-Think of workbooks as dashboards witch each component is built by using an underlying KQL query of your data.
+Think of workbooks as dashboards which each component is built by using an underlying KQL query of your data.
 
 #### Analytics alerts
 
@@ -75,17 +74,17 @@ You can enable built-in analytics alerts within your Sentinel workspace, you can
 
 There are some built-in hunting queries that SOC analysts can use and they can also create their. It also integrates with Azure Notebooks and provides example notebooks for advanced hunters.
 
-#### Incidents and investigations
+#### Incidents and Investigations
 
 An incident is created when an alert that you've enabled is triggered. you can do standard incident management tasks like changing status or assigning incidents to individuals for investigation and you can visually investigate incidents by mapping entities across log data along a timeline.
 
-#### Automation playbooks
+#### Automation Playbooks
 
-You can automate some of your security operations and make your SOC more productive. Sentinel integrates with Azure Logic Apps, enabling you to create automated workflows, or playbooks, in response to events. These capabilities are often referred to as security orchestration, automation, and response (SOAR).
+You can automate some of your security operations and make your SOC more productive. Sentinel integrates with Azure Logic Apps, enabling you to create automated workflows, or playbooks, in response to events. These capabilities are often referred to as a security orchestration, automation, and response (SOAR).
 
-**Possibilities**
+****Possibilities****
 
-- Ingest data from your cloud and on-premises environments.
+- Ingest data from your cloud and on-premise environments.
 - Perform analytics on that data.
 - Manage and investigate any incidents that occur.
 - Perhaps even respond automatically by using playbooks.
@@ -111,17 +110,17 @@ Other capabilities...
 - Integration with the Azure Logic Apps service and its hundreds of connectors.
 - Benefits of Microsoft research and machine learning.
 - Key log sources provided for free.
-- Support for hybrid cloud and on-premises environments.
+- Support for hybrid cloud and on-premise environments.
 - SIEM and a data lake all in one.
 
-Clear requierments from the organization:
+Clear requirements from the organization:
 
 - Support for data from multiple cloud environments.
 - Features and functionality required for a security operations center (SOC), without too much administrative overhead.
 
-> If you're collecting infrastructure or application logs for performance monitoring, consider also using Azure Monitor and Log Analytics for that purpose.
+> If you're collecting infrastructure or application logs for performance monitoring, also consider using Azure Monitor and Log Analytics for that purpose.
 
-### Knoledge check
+### Knowledge check
 
 - What does Microsoft Sentinel provide?
   - An end-to-end solution for security operations
@@ -138,20 +137,20 @@ Clear requierments from the organization:
 
 #### Implementation options
 
-**Single-Tenant with a single Microsoft Sentinel Workspace**
+****Single-Tenant with a single Microsoft Sentinel Workspace****
 
 Receives logs from resources in other regions within the same tenant.
 
 |Pros|Cons|
 |------|------|
 |Central Pane of Glass|May not meet Data Governance Requirements|
-|Consolidates all security logs and information|Can incure bandwidth cost for cross region|
+|Consolidates all security logs and information|Can incur bandwidth cost for cross region|
 |Easier to query all information|
 |Azure Log Analytics RBAC to control data access|
 |Microsoft Sentinel RBAC for service RBAC|
 |
 
-**Single-Tenant with regional Microsoft Sentinel Workspaces**
+****Single-Tenant with regional Microsoft Sentinel Workspaces****
 
 Will have multiple Sentinel workspaces requiring the creation and configuration of multiple Microsoft Sentinel and Log Analytics workspaces.
 
@@ -171,24 +170,24 @@ Will have multiple Sentinel workspaces requiring the creation and configuration 
     | union workspace("WorkspaceName").TableName
 ~~~
 
-**Multi-Tenant**
+****Multi-Tenant****
 
-You implement Microsoft Sentinel workspace in multiple-tenant using Azure Lighthouse.
+You implement Microsoft Sentinel workspace in multiple tenant using Azure Lighthouse.
 
 > Use the same workspace for both Microsoft Sentinel and Microsoft Defender for Cloud, so that all logs collected by Microsoft Defender for Cloud can also be ingested and used by Microsoft Sentinel.
 
 ### Create a Microsoft Sentinel workspace
 
-**Requiers**
+****Requiers****
 
-- To enable: contributor permissions to the subscription in which the Microsoft Sentinel workspace resides.
-- To use: need either contributor or reader permissions on the resource group that the workspace belongs.
+- To enable: contributor permission to the subscription in which the Microsoft Sentinel workspace resides.
+- To use: need either contributor or reader permission on the resource group that the workspace belongs.
 
 #### Create and configure a Log Analytics workspace
 
-**Add Microsoft Sentinel to a workspace**
+****Add Microsoft Sentinel to a workspace****
 
-Need a Log Analytics Workspace and you can create one when adding Microsoft Sentiel. The LAW requiers:
+Need a Log Analytics Workspace and you can create one when adding Microsoft Sentiel. The LAW requires
 
 - A subscription
 - A resource group
@@ -210,7 +209,7 @@ Once the LAW selected, just add the Microsoft Sentinel Solution and the active s
 
 Azure Lighthouse allows greater flexibility to manage resources for multiple customers without having to sign in to different accounts in different tenants. Azure Lighthouse allows greater flexibility to manage resources for multiple customers without having to sign in to different accounts in different tenants.
 
-### Understand Microsoft Sentinel permissions and roles
+### Understand Microsoft Sentinel permission and roles
 
 Use Azure RBAC to create and assign roles within your security operations team to grant appropriate access to Microsoft Sentinel. Roles can be assigned in the Microsoft Sentinel workspace directly, or in a subscription or resource group that the workspace belongs to.
 
@@ -224,13 +223,13 @@ For best results, these roles should be assigned to the resource group that cont
 - ****Microsoft Sentinel Automation Contributor:**** allows Microsoft Sentinel to add playbooks to automation rules
     > MSAC role isn't meant for user accounts.
 
-#### Additional roles and permissions
+#### Additional roles and permission
 
 - ****Working with playbooks to automate responses to threats:**** You can use the Logic App Contributor role to assign explicit permission for using playbooks.
-- ****Giving Microsoft Sentinel permissions to run playbooks:**** this account must be granted explicit permissions to the resource group where the playbook resides. To grant these permissions to this service account, your account must have Owner permissions on the resource groups containing the playbooks.
-- ****Connecting data sources to Microsoft Sentinel:**** you must assign the user write permissions on the Microsoft Sentinel workspace.
+- ****Giving Microsoft Sentinel permission to run playbooks:**** this account must be granted explicit permission to the resource group where the playbook resides. To grant these permissions to this service account, your account must have Owner permission on the resource groups containing the playbooks.
+- ****Connecting data sources to Microsoft Sentinel:**** you must assign the user write permission on the Microsoft Sentinel workspace.
 - ****Guest users assigning incidents:**** in addition to the Microsoft Sentinel Responder role, the user will also need to be assigned the role of Directory Reader.
-- ****Creating and deleting workbooks:**** he user requires either the Microsoft Sentinel Contributor role or a lesser Microsoft Sentinel role plus the Azure Monitor role of Workbook Contributor.
+- ****Creating and deleting workbooks:**** the user requires either the Microsoft Sentinel Contributor role or a lesser Microsoft Sentinel role plus the Azure Monitor role of Workbook Contributor.
 
 #### Azure roles and Azure Monitor Log Analytics roles
 
@@ -247,11 +246,11 @@ Log Analytics roles grant access across all your Log Analytics workspaces:
 
 #### Custom roles and advanced Azure RBAC
 
-You can create your own custom roles. Just like built-in roles, you can assign custom roles to users, groups, and service principals
+You can create your own custom roles. Just like built-in roles, you can assign custom roles to users, groups, and service principals.
 
 ### Manage Microsoft Sentinel settings
 
-Environment Settings are managed in two areas, in Microsoft Sentinel (Pricing, Settings) and in the Log Analytics workspace where Microsoft Sentinel resides and were most of the settings  are managed.
+Environment Settings are managed in two areas, in Microsoft Sentinel (Pricing, Settings) and in the Log Analytics workspace where Microsoft Sentinel resides and where most of the settings  are managed.
 
 #### Configure log retention
 
@@ -328,7 +327,7 @@ The primary tables to manage alerts and incidents are SecurityAlert and Security
 
 |Table| Description|
 |------|------|
-AzureActivity| Entries from the Azure Activity log that provides insight into any subscription-level or management group level events that have occurred in Azure.
+AzureActivity| Entries from the Azure Activity log that provide insight into any subscription-level or management group-level events that have occurred in Azure.
 AzureDiagnostics| Stores resource logs for Azure services that use Azure Diagnostics mode. Resource logs describe the internal operation of Azure resources.
 AuditLogs| Audit log for Azure Active Directory. Includes system activity information about user and group management, managed applications, and directory activities.
 CommonSecurityLog| Syslog messages using the Common Event Format (CEF).
@@ -361,7 +360,7 @@ EmailEvents| Microsoft 365 email events, including email delivery and blocking e
 EmailPostDeliveryEvents| Security events that occur post-delivery, after Microsoft 365 has delivered the emails to the recipient mailbox
 EmailUrlInfo| Information about URLs on emails
 EmailAttachmentInfo| Information about files attached to Office 365 emails
-IdentityDirectoryEvents| Events involving an on-premises domain controller running Active Directory (AD). This table covers a range of identity-related events and system events on the domain controller.
+IdentityDirectoryEvents| Events involving an on-premise domain controller running Active Directory (AD). This table covers a range of identity-related events and system events on the domain controller.
 IdentityLogonEvents| Authentication events on Active Directory and Microsoft online services
 IdentityQueryEvents| Queries for Active Directory objects, such as users, groups, devices, and domains
 |
@@ -382,3 +381,87 @@ IdentityQueryEvents| Queries for Active Directory objects, such as users, groups
 </details>
 
 ## Use watchlists in Microsoft Sentinel
+
+Microsoft Sentinel watchlists enable collecting data from external data sources for correlation with the events in your Microsoft Sentinel environment. Watchlists are stored in your Microsoft Sentinel workspace as name-value pairs and are cached for optimal query performance and low latency.
+
+### Plan for watchlists
+
+****Common scenarios for using watchlists****
+
+- Investigating threats and responding to incidents quickly with the rapid import of IP addresses, file hashes, and other data from CSV files.
+- Importing business data as a watchlist.
+- Reducing alert fatigue, like creating allowlists to suppress alerts from a group of users, such as users from authorized IP addresses that perform tasks that would normally trigger the alert
+- Enriching event data with name-value combinations derived from external data sources.
+
+### Create a watchlist
+
+To use the watchlist data in KQL, use the KQL function _GetWatchlist('watchlist name').
+
+> File uploads are currently limited to files of up to 3.8 MB in size.
+
+### Manage watchlists
+
+We recommend you edit an existing watchlist instead of deleting and recreating a watchlist, has Log analytics has a five-minute SLA for data ingestion.
+
+- Edit a watchlist to edit or add an item to the watchlist.
+- Bulk update of a watchlist appends items to the existing watchlist. Then, it de-duplicates the items in the watchlist where all the value in each column match.
+
+    > If you've deleted an item from your watchlist file and upload it, bulk update won't delete the item in the existing watchlist. Delete the watchlist item individually. Or, when you have many deletions, delete and recreate the watchlist.
+
+<details><summary><b>Knowledge check</b></summary>
+1. Which of the following operations is a typical scenario for using a Microsoft Sentinel watchlist??
+    <details><summary>Answer</summary>
+    Responding to incidents quickly with the rapid import of IP addresses.
+    </details>
+2. How do you access a new watchlist named MyList in KQL??
+    <details><summary>Answer</summary>
+    _GetWatchlist('MyList')
+    </details>
+</details>
+
+## Utilize threat intelligence in Microsoft Sentinel
+
+### Define threat intelligence
+
+The most utilized CTI in SIEM solutions like Microsoft Sentinel is threat indicator data, sometimes called Indicators of Compromise (IoCs). Threat indicators, considered as tactical, associate URLs, file hashes, IP addresses, and other data with known threat activity like phishing, botnets, or malware.
+
+****You can integrate threat intelligence (TI)****
+
+- Use Data connectors to various TI platforms to import threat intelligence into Microsoft Sentinel.
+- View and manage the imported threat intelligence in Logs and the new Threat Intelligence area of Microsoft Sentinel.
+- Use the built-in Analytics rule templates to generate security alerts and incidents using your imported threat intelligence.
+- Visualize critical information about your threat intelligence in Microsoft Sentinel with the Threat Intelligence workbook.
+- Perform threat hunting with your imported threat intelligence.
+
+[Sentinel Data connectors](images/05-CSE-Sentinel_data_connectors.png)
+
+### Manage your threat indicators
+
+With the Threat Intelligence area you can also view, sort, filter, and search your imported threat indicators without even writing a Logs query. These tasks include indicator tagging and creating new indicators related to security investigations.
+
+Tagging threat indicators is an easy way to group them to make them easier to find. You can tag threat indicators individually or multi-select indicators and tag them all at once. Since tagging is free-form, a recommended practice is to create standard naming conventions for threat indicator tags.
+
+### View your threat indicators with KQL
+
+The indicators reside in the ThreatIntelligenceIndicator table.
+
+To view your threat indicators with KQL. Select Logs from the General section of the Microsoft Sentinel menu. Then run a query on the ThreatIntelligenceIndicator table.
+
+~~~kql
+ThreatIntelligenceIndicator
+~~~
+
+<details><summary><b>Knowledge check</b></summary>
+1. In Threat Intelligence, indicators are considered as which of the following?
+    <details><summary>Answer</summary>
+    Tactical
+    </details>
+2. Which of these items is an example of a Threat indicator?
+    <details><summary>Answer</summary>
+    Domain Name
+    </details>
+3. What table do you query in KQL to view your indicators?
+    <details><summary>Answer</summary>
+    ThreatIntelligenceIndicator
+    </details>
+</details>
