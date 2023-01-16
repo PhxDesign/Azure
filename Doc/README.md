@@ -9,7 +9,7 @@
 
 ## Formation
 
-### Azure Fundamentals (fr) - [](https://badgen.net/badge/Statut/draft/grey?icon=windows)
+### Azure Fundamentals (fr) - ![](https://badgen.net/badge/Statut/draft/grey?icon=windows)
 
 Condensé sur la formation Azure Fundamentals permettant d'obtenir la certification AZ-900.
 
@@ -20,7 +20,7 @@ Condensé sur la formation Azure Fundamentals permettant d'obtenir la certificat
 [Types de services cloud](/Doc/Azure%20Fundamentals/03-Types_de_services_cloud.md)|*[MS Learn](https://learn.microsoft.com/en-ca/training/modules/describe-cloud-service-types/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.wwl.microsoft-azure-fundamentals-describe-cloud-concepts)*
 [Principaux composants architecturaux](/Doc/Azure%20Fundamentals/04-Principaux_composants_architecturaux.md)|*[MS Learn](https://learn.microsoft.com/en-ca/training/modules/describe-core-architectural-components-of-azure/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.wwl.azure-fundamentals-describe-azure-architecture-services)*
 
-### SC-200 Security Operations Analyst (en) - [](https://badgen.net/badge/Statut/draft/grey?icon=windows)
+### SC-200 Security Operations Analyst (en) - ![](https://badgen.net/badge/Statut/draft/grey?icon=windows)
 
 Microsoft Learn training digest to take the SC-200 Security Operations Analyst exam.
 
