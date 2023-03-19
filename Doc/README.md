@@ -28,4 +28,3 @@ Microsoft Learn training digest to take the SC-200 Security Operations Analyst e
 |-|-|
 [Create KQL queries for Microsoft Sentinel](/Doc/SC-200%20Security%20Operations%20Analyst/04-Create_KQL_queries_for_Micorsoft_Sentienl.md) | *[MS Learn](https://learn.microsoft.com/en-ca/training/paths/sc-200-utilize-kql-for-azure-sentinel/?ns-enrollment-type=Collection&ns-enrollment-id=r6pjby3x1pqxq2)*
 [Configure Microsoft Sentinel environment](/Doc/SC-200%20Security%20Operations%20Analyst/05-Configure_Sentinel_environment.md) | *[MS Learn](https://learn.microsoft.com/en-ca/training/paths/sc-200-configure-azure-sentinel-environment/?ns-enrollment-type=Collection&ns-enrollment-id=r6pjby3x1pqxq2)*
-|
