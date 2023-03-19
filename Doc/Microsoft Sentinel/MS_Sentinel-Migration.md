@@ -9,19 +9,16 @@
 
 ## Questions/réponses sur la migration
 
-* Est-ce possible de migrer la solution Microsoft Sentinel?
-  * Oui, il est possible de migrer la solution.
-* Est-ce que la migration s'effectue via un déplacement unique des ressources?
-  * Non, la migration consiste en trois grandes étapes assez simples.
-* Est-ce que l'abonnement peut-être différent de l'instance source?
-  * Oui, tant que l'abonnement permet de respecter les limites de migration identifiées plus bas.
-* Est-ce que la migration comporte la perte de données?
-  * Non, les données présentes dans l'instance Log Analytics sont conservées.
-* Exist-t-il des limites pour la migration?
-  * Oui, les limites sont les suivantes:
-    * La solution doit rester dans le même tenant.
-    * La région de destination, si déférente, doit conserver la même disponibilité de services que celle de la région source.
-    * Certains services complémentaires ne peuvent être migrés, ou conserveront la région d'origine (selon la possibilité du service).
+|Question |Réponse |
+|--- |---|
+|Est-ce possible de migrer la solution Microsoft Sentinel? |Oui, il est possible de migrer la solution. |
+|Est-ce que la migration s'effectue via un déplacement unique des ressources? | Non, la migration consiste en trois grandes étapes assez simples. |
+|Est-ce que l'abonnement peut-être différent de l'instance source? |Oui, tant que l'abonnement permet de respecter les limites de migration identifiées plus bas. |
+|Est-ce que la migration comporte la perte de données? |Non, les données présentes dans l'instance Log Analytics sont conservées. |
+|Exist-t-il des limites pour la migration? |Oui, les limites sont les suivantes: |
+| |  La solution doit rester dans le même tenant. |
+| |  La région de destination, si déférente, doit conserver la même disponibilité de services que celle de la région source. |
+| |  Certains services complémentaires ne peuvent être migrés, ou conserveront la région d'origine (selon la possibilité du service). |
 
 ## Les trois grandes étapes
 

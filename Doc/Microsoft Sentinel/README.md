@@ -5,7 +5,7 @@
 [//]: # (ms.topic: SIEM)
 [//]: # (ms.date: 03/19/2023)
 
-# Microsoft Sentinel
+# Microsoft Sentinel - ![](https://badgen.net/badge/Statut/draft/grey?icon=azure)
 
 ## Qu'est-ce que Microsoft Sentinel
 
@@ -14,3 +14,5 @@
 ## Maintenir et intégrer le cycle de vie de la solution
 
 ## Les opérations courantes (day-to-day)
+
+## [Migration du service](MS_Sentinel-Migration.md)
