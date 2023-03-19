@@ -18,7 +18,7 @@
 |Est-ce que la migration comporte la perte de données? |Non, les données présentes dans l'instance Log Analytics sont conservées. |
 |Existe-t-il des limites pour la migration? |Oui, les limites sont les suivantes: |
 | |  La solution doit rester dans le même tenant. |
-| |  La région de destination, si déférente, doit conserver la même disponibilité de services que celle de la région source. |
+| |  La région de destination, si déférente, doit conserver la même disponibilité de services que celle de la région source et des [opérations supplémentaires](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/move-workspace-region) sont requises et qui ne font pas partie de cette procédure. |
 | |  Certains services complémentaires ne peuvent être migrés, ou conserveront la région d'origine (selon la possibilité du service). |
 
 ## Les trois grandes étapes
