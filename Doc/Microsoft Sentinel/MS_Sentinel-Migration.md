@@ -76,7 +76,7 @@ Tout comme pour les ressources, il est important de s'assurer que les accès soi
 > ATTENTION, _nom de l'instance log analytics_ doit correspondre à celle liée avec la solution Sentinel que vous voulez migrer.
 
 #### Migration des ressources
-Il est suggérer de suivre ces étapes dans l'ordre afin d'optimiser le temps et limiter les erreurs. Pour chaque déplacement, effectuer une capture d'écran lorsque le processus de validation est complété.
+Il est suggéré de suivre ces étapes dans l'ordre afin d'optimiser le temps et limiter les erreurs. Pour chaque déplacement, effectuer une capture d'écran lorsque le processus de validation est complété.
 
 > Le processus de validation représente l'étape 2 du déplacement de ressources.
 
